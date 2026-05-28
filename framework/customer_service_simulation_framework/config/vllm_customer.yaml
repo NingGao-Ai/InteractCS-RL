@@ -1,0 +1,53 @@
+# Application config
+app:
+  log_level: INFO
+  logger_dir: logs/log_results
+  log_to_file: true
+
+# Base path
+base_path: <project_root>
+
+# Agent config (supports multiple agents)
+agent:
+  - name: user
+    llm:
+      client_type: openai
+      model: deepseek-chat
+      api_url: <your_api_url>
+      api_key: "<your_api_key>"
+      max_retries: 3
+      kwargs:
+        temperature: 1.2
+        max_tokens: 8000
+        timeout: 180
+    prompt_file: code/prompt/user-simulator-prompt-v2.txt
+    user_profiles_file: data/user_roleplay_data/user_roleplay_data_stage_6_user_profiles.json
+    user_core_need_file: data/user_roleplay_data/user_roleplay_data_stage_8_core_need.json
+  
+  - name: customer
+    llm:
+      client_type: vllm
+      model: model/qwen25-32b-sft-gpt-200-with-300-low-compensation/global_step_18
+      api_url: http://localhost:8003/v1
+      max_retries: 3
+      kwargs:
+        temperature: 0.7
+        max_tokens: 8000
+        timeout: 180
+    prompt_file: code/prompt/paper/customer-service-prompt-general2.txt
+
+# Session config
+session:
+  - name: RLSimulation
+    num_conversations: 80
+    max_workers: 20
+    max_turns: 20
+    save_batch_size: 20
+    system_signals_file: data/user_roleplay_data/user_roleplay_data_stage_7_system_signals_pool.jsonl
+    output_dir: framework/customer_service_simulation_framework/outputs
+    user_category_distribution:
+      "1": 8
+      "2": 24
+      "3": 20
+      "4": 20
+      "5": 8

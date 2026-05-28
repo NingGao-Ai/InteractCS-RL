@@ -1,0 +1,35 @@
+interaction:
+  - name: "user_simulation"
+    class_name: "customer_service_related.interactions.user_simulation_interaction_no_transfer.UserSimulationInteraction"
+    config: {
+      # Basic configuration
+      max_turns: 15,
+
+      # Reward configuration
+      reward: {
+        # Target rate configuration
+        target_voucher_rate: 0.27,       # Target voucher rate (30%)
+        # "interaction/voucher_cost": self.voucher_cost_lambda
+        initial_voucher_cost: 0.7,
+      },
+
+      # "interaction/smoothed_train_voucher_rate": self.smoothed_voucher_rate
+      resume_smoothed_voucher_rate: 0.28,
+      
+      # User simulator configuration
+      # http://localhost:8001/v1
+      user_simulator: {
+        prompt_template: "code/prompt/user-simulator-prompt-v2.txt",
+        llm: {
+          client_type: vllm,
+          model: <cluster_path>/banma_aigc/model/huggingface.co/Qwen/Qwen2.5-32B-Instruct,
+          api_url: http://localhost:8000/v1,
+          max_retries: 3,
+          kwargs: {
+            temperature: 1.2,
+            max_tokens: 256,
+            timeout: 180
+          }
+        }
+      }
+    }

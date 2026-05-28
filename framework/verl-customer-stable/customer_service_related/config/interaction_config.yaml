@@ -1,0 +1,23 @@
+interaction:
+  - name: "user_simulation"
+    class_name: "customer_service_related.interactions.user_simulation_interaction.UserSimulationInteraction"
+    config: {
+      max_turns: 20,
+      satisfaction_weight: 1,
+      response_quality_weight: 0,
+      user_simulator: {
+        prompt_template: "code/prompt/user-simulator-prompt-v2.txt",
+        llm: {
+          client_type: openai,
+          model: deepseek-chat,
+          api_url: <your_api_url>,
+          api_key: "<your_api_key>",
+          max_retries: 3,
+          kwargs: {
+            temperature: 1.2,
+            max_tokens: 8000,
+            timeout: 180
+          }
+        }
+      }
+    }

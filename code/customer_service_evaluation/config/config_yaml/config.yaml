@@ -1,0 +1,56 @@
+# Customer Service Evaluation Framework - Unified Configuration
+# Uses key names corresponding to command line parameters
+
+# User simulator LLM configuration
+user_llm:
+  client_type: "openai"
+  model: "gpt-4.1"
+  api_url: "<your_api_url>"
+  api_key: "<your_api_key>"
+  temperature: 1.2
+  max_tokens: 8000
+  timeout: 180
+  max_retries: 3
+
+# Customer service simulator LLM configuration
+customer_llm:
+  client_type: "openai"
+  model: "gpt-4.1"
+  api_url: "<your_api_url>"
+  api_key: "<your_api_key>"
+  temperature: 0.7
+  max_tokens: 8000
+  timeout: 180
+  max_retries: 3
+
+# User simulator configuration
+user_simulator:
+  prompt_file: "code/prompt/user-simulator-prompt.txt"
+  user_profiles_file: "data/user_roleplay_data/user_roleplay_data_stage_6_user_profiles.json"
+  system_signals_file: "data/user_roleplay_data/user_roleplay_data_stage_7_system_signals_pool.jsonl"
+  core_need_file: "data/user_roleplay_data/user_roleplay_data_stage_8_core_need.json"
+
+# Customer service simulator configuration
+customer_service:
+  prompt_file: "code/prompt/customer-service-prompt-v2.txt"
+
+# Parallel configuration
+parallel:
+  max_workers: 10
+  batch_size: 10
+  max_turns_per_conversation: 20
+
+# Output configuration
+output:
+  output_dir: "data/customer_service_evaluation/gpt4.1"
+  save_format: "json"
+
+# Simulation configuration
+simulation:
+  num_conversations: 200
+  user_category_distribution:
+    "1": 20
+    "2": 60
+    "3": 50
+    "4": 50
+    "5": 20

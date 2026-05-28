@@ -1,0 +1,70 @@
+# Application config
+app:
+  log_level: INFO
+  logger_dir: logs/evaluation_logs
+  log_to_file: true
+# Base path
+base_path: <project_root>
+
+# Evaluation agent config (supports multiple evaluation types)
+agent:
+  # Speech evaluation
+  - name: speech
+    llm:
+      client_type: openai
+      model: deepseek-chat
+      api_url: <your_api_url>
+      api_key: "<your_api_key>"
+      max_retries: 3
+      kwargs:
+        temperature: 0.3
+        max_tokens: 4000
+        timeout: 180
+    prompt_file: code/prompt/evaluation-speech.txt
+  
+  # Logic evaluation
+  - name: logic
+    llm:
+      client_type: openai
+      model: deepseek-chat
+      api_url: <your_api_url>
+      api_key: "<your_api_key>"
+      max_retries: 3
+      kwargs:
+        temperature: 0.3
+        max_tokens: 4000
+        timeout: 180
+    prompt_file: code/prompt/evaluation-logic.txt
+  
+  # Compensation evaluation
+  - name: compensation
+    llm:
+      client_type: openai
+      model: deepseek-chat
+      api_url: <your_api_url>
+      api_key: "<your_api_key>"
+      max_retries: 3
+      kwargs:
+        temperature: 0.3
+        max_tokens: 4000
+        timeout: 180
+    prompt_file: code/prompt/evaluation-compensation.txt
+
+# Session config
+session:
+  - name: Evaluation
+    # Input file: jsonl file containing dialogues to evaluate
+    input_file: framework/customer_service_simulation_framework/output/deepseek-chat/2025-11-17/conversation_20_sample_11:11:50.jsonl
+    # Output directory
+    output_dir: framework/customer_service_simulation_framework/outputs/evaluation
+    # Parallel worker threads
+    max_workers: 40
+    # Batch save size
+    save_batch_size: 20
+    # Evaluation types to execute
+    # Supported: speech, logic, compensation, format (format check)
+    evaluator_types:
+      - speech
+      - logic
+      - compensation
+      - format

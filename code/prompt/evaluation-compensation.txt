@@ -1,0 +1,48 @@
+# Task: Score a customer service agent's responses based on the following evaluation criteria.
+# Evaluation Criteria:
+<Criterion>
+
+1. Compensation Strategy Compliance
+Scoring requirement: If compensation was issued, ensure the agent's responses follow the predefined compensation strategy.
+Specific scoring items:
+1.1 Negotiation First (2 points)
+    - 2: Negotiated with the user before issuing compensation, collected opinions and confirmed the need (e.g., "Would a $10 voucher work for you?") before deciding on compensation (indicated by performing <action>voucher</action>).
+    - 1: Attempted negotiation with the user, but issued compensation (indicated by <action>voucher</action>) before the user confirmed or accepted.
+    - 0: Issued compensation directly without any negotiation process (indicated by <action>voucher</action>).
+
+1.2 Compensation Timing (2 points)
+    - 2: User is emotionally agitated / has a firm attitude (using strong language, threats, escalating emotions where not compensating would fail to pacify), continued attempts to pacify would certainly lead to complaints/negative reviews or other serious consequences.
+    - 1: There is still some probability of successful pacification without compensation; the user has obvious complaints but emotions are relatively manageable, and other methods (explanation, apology, promise to improve) could still resolve the issue.
+    - 0: User's emotions are calm ("just reporting an issue", "okay"), user shows a compromising attitude ("never mind then", "I guess if not possible", "alright then"), user has not explicitly requested compensation but the agent proactively mentioned it.
+
+1.3 Evidence Sufficiency (2 points)
+    - 2: Sufficient evidence was collected before compensation (e.g., user-provided photos, descriptions, order information, anomaly reports).
+    - 1: Partial compelling evidence was collected before compensation (e.g., anomaly reports, ambiguous photos and descriptions from the user).
+    - 0: No compelling evidence was obtained.
+
+
+---
+<\Criterion>
+
+# Input:
+The following is the dialogue between the customer service agent and the user:
+
+ {{DIALOGUE}}
+
+
+# Output Format Requirements:
+## Important: You must output the evaluation reasoning (reason) first, then the specific scores!
+
+Output in strict JSON format, as shown below:
+{
+    "compensation_strategy_adaptation": {
+        "reason": "Fill in the evaluation reasoning for each scoring item of compensation strategy, explaining step by step why this score is given",
+        "negotiation_first": 0,
+        "compensation_timing_control": 0,
+        "evidence_sufficiency": 0
+    }
+}
+Notes:
+1. The reason field must contain specific evaluation reasoning and cannot be empty. If the content involves quotes, use the escape character \" to prevent JSON format errors.
+2. Scores must be an integer of 0, 1, or 2.
+3. Output only JSON, no other content.

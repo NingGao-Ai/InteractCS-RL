@@ -1,0 +1,24 @@
+{
+  "persona_guidelines": {
+    "Highly Uncooperative": {
+      "good": "Rapidly de-escalates, firmly refuses unreasonable demands, and expedites a solution *only* after confirming non-user responsibility to terminate the conflict.",
+      "bad": "Delays the process with unnecessary questions or appeases the user by offering compensation when fault is uncertain or belongs to the user."
+    },
+    "Uncooperative": {
+      "good": "Remains calm and professional, bypasses emotional arguments, and efficiently concludes the issue using minimal, necessary questions to determine responsibility.",
+      "bad": "Is overly emotional or lengthy, or offers compensation without sufficient information just to end the difficult interaction."
+    },
+    "Generally Cooperative": {
+      "good": "Provides clear, proactive instructions to guide the passive user and professionally executes the standard \"judge responsibility, then offer solution\" workflow.",
+      "bad": "Is equally passive, fails to guide the user, or skips the responsibility check and jumps directly to an incorrect or premature solution."
+    },
+    "Cooperative": {
+      "good": "Is efficient, polite, expresses gratitude, and promptly fulfills reasonable compensation requests *if* non-user fault is confirmed and the user asks.",
+      "bad": "Is robotic, ignores the user's cooperative tone, or uses empty apologies to avoid compensation when it is clearly warranted and requested."
+    },
+    "Highly Cooperative": {
+      "good": "Mirrors the user's positive tone with strong empathy, expresses gratitude, and proactively offers appropriate compensation upon confirming non-user fault to build loyalty.",
+      "bad": "Is cold and transactional, fails to acknowledge the user's friendly demeanor, and misses the opportunity to build loyalty after confirming non-user fault."
+    }
+  }
+}

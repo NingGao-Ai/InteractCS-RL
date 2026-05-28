@@ -1,0 +1,90 @@
+# Task: Score a customer service agent's responses based on the following evaluation criteria.
+# Evaluation Criteria:
+<Criterion>
+
+1. User Profiling
+
+1.1 User Profile and Emotion Assessment (2 points)
+    - 2: Accurately identifies the user's current emotional state and cooperation level (e.g., observes that the user is emotionally agitated or unwilling to cooperate, or detects that the user's responses indicate they are about to lose patience).
+    - 1: Partially identifies user emotions and cooperation level (misjudges some emotions).
+    - 0: Completely fails to identify the user's emotional state and cooperation level (does not consider this aspect at all).
+
+1.2 Contact Motive Identification (2 points)
+    - 2: Effectively clarifies or correctly identifies the user's issue during communication (e.g., asks appropriate follow-up questions when existing information is insufficient, avoids unnecessary follow-up when existing information is sufficient).
+    - 1: Follow-up questions are missing, redundant, or unclear.
+    - 0: Fails to ask follow-up questions when the issue is unclear; continues asking when the issue is already clear.
+
+1.3 User Strategy Switching (2 points)
+    - 2: Accurately switches strategies based on user emotions and cooperation level (e.g., quickly pacifies and pivots to responsibility assessment for emotionally agitated non-cooperative users; expresses courtesy and gratitude for calm cooperative users; provides clear guidance and proactively guides passive users to provide information).
+    - 1: Makes some strategy adjustments based on user emotions and cooperation level, but not accurately.
+    - 0: Makes no strategy adjustments whatsoever based on user emotions and cooperation level.
+
+---
+
+2. Business Rule Competency
+
+2.1 SOP Adherence (1 point)
+    - 1: Fully follows the overall process of [Identify Motive] -> [Collect Information] -> [Determine Responsibility] -> [Decision Execution], with the ability to interleave pacification and negotiation behaviors within the overall process.
+    - 0: Skips one or more steps and proceeds directly to a subsequent action.
+
+2.2 Business Information Accuracy (1 point)
+    - 1: Response content is truthful and reliable with no fabricated processes, false information, or misleading descriptions. All suggestions are based on feasible actions (pacification, voucher compensation, negotiation, information collection, opening/closing remarks) with no actions requiring further proactive outreach to the user.
+    - 0: Response contains hallucinations, false promises, refund promises, obvious misinformation, or any issues requiring the agent to proactively reach out to the user again (e.g., "We will help you resolve this later", promising refunds, "We will contact you afterwards", "Your order will be redelivered", "Your order is being processed, please wait", or any behavior requiring the agent to proactively contact the user again).
+
+2.3 Handling Fairness (1 point)
+    - 1: Does not make decisions that violate fairness due to user emotions, language manipulation, or threats without any potentially valid evidence.
+    - 0: Makes decisions that violate fairness to appease the user (e.g., issuing voucher compensation without any photo evidence, context, or anomaly reports).
+
+2.4 Output Consistency (1 point)
+    - 1: The <response></response> tag content aligns with the reasoning logic in the <think></think> tag; the <action></action> tag is consistent with the <response></response> tag context.
+    - 0: The <response></response> tag content contradicts the reasoning logic in the <think></think> tag; the <action></action> tag decision conflicts with the <response></response> tag context (e.g., <response></response> tells the user a voucher will be provided, but <action></action> content is not "voucher").
+
+2.5 Dialogue Closure Recognition (1 point)
+    - 1: Accurately identifies when the user wishes to end the conversation and outputs an appropriate closing remark (e.g., "Happy to help you").
+    - 0: Re-enters other processes after the user ends the conversation (e.g., "Could you provide xxx information?").
+
+---
+
+3. Out-of-Domain (OOD) Issues
+3.1 OOD Issue Identification (0 to 1 point)
+    - 1: Identifies an OOD issue (outside the broad food delivery customer service scenario) and provides a relevant explanation (e.g., "I'm sorry, the issue you reported is outside our handling scope"), or the dialogue does not involve OOD issues.
+    - 0: Fails to identify an OOD issue and provides an extended response to the OOD question (e.g., software issues, etc.).
+
+---
+<\Criterion>
+
+# Input:
+The following is the dialogue between the customer service agent and the user:
+
+ {{DIALOGUE}}
+
+
+# Output Format Requirements:
+## Important: You must output the evaluation reasoning (reason) for each top-level dimension first, then the specific scores!
+
+Output in strict JSON format, as shown below:
+{
+  "user_profile_recognition": {
+    "reason": "Fill in the evaluation reasoning for each indicator of user profile recognition, explaining step by step why this score is given",
+    "user_profile_emotion_judgment": 0,
+    "contact_motivation_recognition": 0,
+    "user_strategy_switching": 0
+  },
+  "business_rule_capability": {
+    "reason": "Fill in the evaluation reasoning for each indicator of business rule capability",
+    "sop_compliance": 0,
+    "business_info_authenticity": 0,
+    "processing_fairness": 0,
+    "output_consistency": 0,
+    "dialogue_end_recognition": 0
+  },
+  "ood_issues": {
+    "reason": "Fill in the evaluation reasoning for the OOD issue indicator",
+    "ood_issue_recognition": 0
+  }
+}
+
+Notes:
+1. The reason field must contain specific evaluation reasoning and cannot be empty. If the content involves quotes, use the escape character \" to prevent JSON format errors.
+2. Scores must be an integer within the corresponding range (0/1/2 or 0/1).
+3. Output only JSON, no other content.

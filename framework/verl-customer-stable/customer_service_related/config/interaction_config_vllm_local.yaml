@@ -1,0 +1,30 @@
+interaction:
+  - name: "user_simulation"
+    class_name: "customer_service_related.interactions.user_simulation_interaction.UserSimulationInteraction"
+    config: {
+      # Basic configuration
+      max_turns: 15,
+
+      # Reward configuration
+      reward: {
+        # Target rate configuration
+        target_transfer_rate: 0.2,      # Target transfer-to-human rate (20%)
+        target_voucher_rate: 0.3,       # Target voucher rate (30%)
+      },
+
+      # User simulator configuration
+      user_simulator: {
+        prompt_template: "code/prompt/user-simulator-prompt-v2.txt",
+        llm: {
+          client_type: vllm,
+          model: <cluster_path>/banma_aigc/model/huggingface.co/Qwen/Qwen2.5-32B-Instruct,
+          api_url: http://localhost:8000/v1,
+          max_retries: 3,
+          kwargs: {
+            temperature: 1.2,
+            max_tokens: 256,
+            timeout: 180
+          }
+        }
+      }
+    }

@@ -1,0 +1,5 @@
+working_dir: ./
+excludes: ["/.git/", "/huggingface.co/**", "**/*.safetensors", "**/model*.safetensors","*/log_dir/*","*/output/*"]
+env_vars:
+  TORCH_NCCL_AVOID_RECORD_STREAMS: "1"
+  CUDA_DEVICE_MAX_CONNECTIONS: "1"

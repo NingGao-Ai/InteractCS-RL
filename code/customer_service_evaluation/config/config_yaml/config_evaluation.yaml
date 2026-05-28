@@ -1,0 +1,34 @@
+# Customer Service Evaluation Framework - Evaluation Configuration
+# All parameters can be overridden via bash scripts
+
+# Input file configuration
+input:
+  input_file: ""  # Path to conversation file to evaluate
+  max_conversations: 100  # Maximum number of conversations to evaluate
+
+# Evaluation LLM configuration
+llm:
+  client_type: "openai"
+  model: "gpt-4.1"
+  api_url: "<your_api_url>"
+  api_key: "<your_api_key>"
+  temperature: 0
+  max_tokens: 6000
+  timeout: 120
+  max_retries: 3
+
+# Evaluation prompt file configuration
+prompts:
+  speech_evaluation_prompt_file: "code/prompt/evaluation-speech.txt"
+  logic_evaluation_prompt_file: "code/prompt/evaluation-logic.txt"
+  compensation_evaluation_prompt_file: "code/prompt/evaluation-compensation.txt"
+
+# Parallel configuration
+parallel:
+  max_workers: 20
+  batch_size: 20
+
+# Output configuration
+output:
+  evaluation_dir: ""  # Evaluation results output directory
+  save_format: "jsonl"

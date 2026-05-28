@@ -1,0 +1,17 @@
+tools:
+  - class_name: "customer_service_related.custom_tool.customer_service_tool.CustomerServiceTool"
+    config:
+      type: native
+    tool_schema:
+      type: "function"
+      function:
+        name: "customer_service"
+        description: "A tool for customer service actions like voucher distribution or chat handling"
+        parameters:
+          type: "object"
+          properties:
+            action:
+              type: "string"
+              description: "The action to perform: 'voucher' for voucher distribution, 'chat' for chat handling"
+              enum: ["voucher", "chat"]
+          required: ["action"]
