@@ -14,9 +14,9 @@
 
 InteractCS-RL reframes task-oriented dialogue (TOD) as a **multi-granularity reinforcement learning** process. Instead of imitating static expert trajectories, our framework trains service agents through closed-loop interaction with persona-driven user simulators, enabling them to **balance empathetic communication with budget-aware decision-making**.
 
-<!-- <p align="center">
+<p align="center">
   <img src="assets/framework.png" width="90%" alt="InteractCS-RL Framework"/>
-</p> -->
+</p>
 
 ### Key Components
 
