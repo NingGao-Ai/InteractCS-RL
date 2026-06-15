@@ -177,6 +177,10 @@ python main_evaluation.py --config config/config_yaml/config_evaluation.yaml
 }
 ```
 
+## Contact
+
+You can email to gaoning_ai@buaa.edu.cn for any connection~ 
+
 ## License
 
 This project is released under the [Apache 2.0 License](LICENSE).
